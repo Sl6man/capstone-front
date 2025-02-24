@@ -1,7 +1,12 @@
+'use client'
+import { useEffect } from 'react';
 import React from 'react'
 import Image from 'next/image'
 import { FaSquareSnapchat } from "react-icons/fa6";
 function page() {
+  useEffect(()=>{
+    alert('heelp')
+  })
 
   return (
 
@@ -11,9 +16,9 @@ function page() {
         {/*container */}
         <div className='bg-gray-50 w-4/5 py-10 flex flex-col items-center '>
         {/* logo */}
-        <div className='flex  justify-center mt-32'>
+        <div className='flex  justify-center mt-30'>
          <Image
-          src='/Snapchat-logo-black-and-white-png.png'
+          src='/Group.png'
           alt=''
           width={80}
           height={0}
@@ -55,6 +60,7 @@ function page() {
              {/*-- Button login */}
              <div className='w-5/6 mt-8 mb-12'>
              <button 
+             onClick={()=> alert('hello')}
              className="w-full bg-[#FFBF00] text-white font-bold py-3 rounded-xl hover:bg-yellow-500 transition">
                 SIGN IN</button>
 
