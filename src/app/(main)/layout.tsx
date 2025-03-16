@@ -9,11 +9,11 @@ export default function MainLayout({
   } :Readonly<{
     children:React.ReactNode;
   }>){
-    return(
+    return(//<PopUp></PopUp> <CreateUser></CreateUser>
         <div className="h-screen flex overflow-hidden">
-     <PopUp>
-      <CreateUser></CreateUser>
-     </PopUp>
+     
+     
+     
             {/* left */}
             <div className="w-[20%] bg-gray-100 border-r-2 borfer-gray-50">
 

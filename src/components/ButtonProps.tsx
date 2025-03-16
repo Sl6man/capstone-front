@@ -1,20 +1,28 @@
-import React from 'react'
+
+
+import React, { useState } from 'react'
 
 
 interface ButtonProps{
   text:string;
   onClick?:()=>void;
   icon?: React.ReactNode;
-  variant?: 'Primary'|'Danger';
+  variant: 'Primary'|'Danger';
   iconBG?: string;
   textStyle?: string;
   className?: string;
+  
 }
-const ButtonProps:React.FC<ButtonProps>=({text,onClick,icon,variant='Primary',className ,iconBG , textStyle})=>{
+const ButtonProps:React.FC<ButtonProps>=({text,onClick,icon,variant='Primary',className ,iconBG , textStyle })=>{
+
+  
+
+
+    
 
   //const [background,setBackgroud]=useState('bg-gray-100')
 
-  const baseStyles="flex items-center gap-2  p-2 rounded-lg transition w-full";
+  const baseStyles='flex items-center gap-2  p-2 rounded-lg transition w-full ';
   const variants={
     Primary: 'bg-gray-100 hover:bg-yellow-500',
     Danger: "bg-red-500 hover:bg-red-600"
