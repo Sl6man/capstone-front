@@ -7,20 +7,82 @@ import { useRouter } from 'next/navigation';
 
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdGroups } from "react-icons/md";
-import CreateUser from "@/components/CreateUser";
+import EditUser from "@/components/EditUser";
 import CreateGroup from '@/components/CreateGroup';
+import CreateUser from '@/components/CreateUser';
+
 import  Cookies  from 'js-cookie';
+
+import { DataTable } from './data-table';
+import {User,columns} from './columns';
+import { View } from 'lucide-react';
+
+
+
 
 function page() {
   const router = useRouter();
   const [isPopupVisibleAddMember, setIsPopupVisibleAddMember] = useState(false);
   const [isPopupVisibleCreateGroup, setIsPopupVisibleCreateGroup] = useState(false);
+  const [isPopupVisibleEditUser, setIsPopupVisibleEditUser] = useState(false);
 
+
+  const  [userID,setUserID]=useState(0)
+
+  const [userInfoTable ,setUserInfoTable]=useState<{id:number ;name:string; email:string; group:string; role:string}[]>([])
 
   useEffect(()=>{
     if(!Cookies.get('token'))
       router.push('login')
-  })
+    
+    fetch("http://127.0.0.1:8000/users/usersInfoTable")
+    .then((response)=> response.json())
+    .then((data)=>setUserInfoTable(data))
+    .catch((error)=> console.error('Erorr fetching users' ,error))
+
+
+  
+  },[])
+
+  const handelViewUser=(user_id : number) =>{
+    setUserID(user_id) 
+    console.log(userID)
+    console.log('=-------------=-------------------=---------------')
+    setIsPopupVisibleEditUser(true)
+
+  }
+
+  const handelDeleteUser=async(user_id : number) =>{
+    
+    console.log(user_id)
+    const confirmed = window.confirm("Are you sure you want to delete this user?");
+  if (!confirmed) return;
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/users/delete/user/${user_id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+     
+      },
+    });
+
+    if (response.ok) {
+      alert("User deleted successfully.");
+      
+     
+    } else {
+      const errorData = await response.json();
+      alert("Error: " + JSON.stringify(errorData));
+    }
+  } catch (error) {
+    console.error("Delete error:", error);
+    alert("An unexpected error occurred.");
+  }
+
+  }
+
+
 
   return (
     <div className='bg-gray-100 h-full flex flex-col '>
@@ -68,7 +130,14 @@ function page() {
 
 
         {/* body */}
-        <div className='flex-1 m-6 bg-white red-400   rounded-lg shadow border-1 "'>33</div>
+        <div className='flex-1 m-6 bg-white red-400   rounded-lg shadow border-1 "'>
+      <div className='m-6 my-8'>
+      <DataTable data={userInfoTable} columns={columns(handelViewUser,handelDeleteUser)} />
+      {isPopupVisibleEditUser && <EditUser  onClose={() => setIsPopupVisibleEditUser(false)} userID={userID} />}
+      </div>
+
+
+        </div>
 
       
     </div>

@@ -105,11 +105,11 @@ const buttonClicked =()=>{
 
     <div  className='mt-auto w-full'>
     <Link href='/login' className='w-full '>
-      <ButtonProps text=''  variant='Danger'
+      <ButtonProps text='Logout' className='text-white py-2' variant='Danger'
       onClick={handleLogout}
       icon={<RiLogoutCircleLine  className='text-xl  text-white'/>} 
       textStyle=''
-      className='py-2'/>
+     />
       </Link> 
     </div>
 

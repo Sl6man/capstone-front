@@ -1,6 +1,6 @@
 import  Menu  from "@/components/Menu";
 import PopUp from "@/components/PopUp";
-import CreateUser from "@/components/CreateUser";
+import EditUser from "@/components/EditUser";
 import React from "react";
 
 export default function MainLayout({
@@ -9,13 +9,13 @@ export default function MainLayout({
   } :Readonly<{
     children:React.ReactNode;
   }>){
-    return(//<PopUp></PopUp> <CreateUser></CreateUser>
+    return(//<PopUp></PopUp> <EditUser></EditUser>
         <div className="h-screen flex overflow-hidden">
      
      
      
             {/* left */}
-            <div className="w-[20%] bg-gray-100 border-r-2 borfer-gray-50">
+            <div className="w-[15%] bg-gray-100 border-r-2 borfer-gray-50">
 
               <Menu ></Menu>
             </div>
@@ -23,7 +23,7 @@ export default function MainLayout({
         
 
             { /* right */}
-            <div className="w-[80%] bg-gray-100 flex flex-col h-screen ">
+            <div className="w-[85%] bg-gray-100 flex flex-col h-screen ">
 
               {children}
             </div>

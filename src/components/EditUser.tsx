@@ -6,22 +6,35 @@ import PopUp from './PopUp'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { error } from 'console'
 
-interface CreateUserProps {
-  
+
+interface EditUserProps {
+  userID:number
   onClose: () => void; // closing popup
+  
 }
-function CreateUser({onClose}:CreateUserProps) {
+function EditUser({onClose,userID}:EditUserProps) {
+
+    const [userInfo,setUserInfo]=useState({
+      
+        username: "",
+        email: "",
+        job_title: "",
+        fname: "",
+        lname: "",
+        group_id:0,
+        role_id:0
+      
+      })
 
   const [firstname,setFirstname]=useState('')
   const [lastname,setLastname]=useState('')
   const [email,setEmail]=useState('')
   const [username,setUsername]=useState('')
-  const [password,setPassword]=useState('')
+
   const [jobtitle,setJobTitle]=useState('')
-  const [group_id,setGroupid]=useState('')
-  const [role_id,setRoleid]=useState('')
+  const [group_id,setGroupid]=useState(0)
+  const [role_id,setRoleid]=useState(0)
   
 
 
@@ -44,46 +57,77 @@ useEffect(() => {
   .then((data)=>setGroups(data))
   .catch((error)=>console.error('error fetching groups',error))
  
+  fetch(`http://127.0.0.1:8000/users/user/info/${userID}`)
+  .then((response)=> response.json())
+  .then((data)=> {
+    setUserInfo(data)
+    setFirstname(data.fname);
+  setLastname(data.lname)
+  setEmail(data.email)
+  setUsername(data.username)
+ 
+  setJobTitle(data.job_title)
+  setGroupid(data.group_id)
+  setRoleid(data.role_id)
+
+  })
+  .catch((error)=> console.error('Error fetching user info',error))
+
+
+
 },[]);
 
-
-
-
-const handleAdd =async ()=>{
-  const user={
-    username:username,
-    email:email,
-    jobtitle:jobtitle,
-    fname:firstname,
-    lname:lastname,
-    password:password,
-    group_id:Number(group_id),
-    role_id:Number(role_id)
-  }
-  
-  try{
-    const response=await fetch("http://127.0.0.1:8000/users/create/user",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-      },
-      body:JSON.stringify(user),
-
+useEffect(()=>{
     
-    });
-    const data=await response.json()
+console.log(userInfo)
+  
 
-    if(response.status===201){
-      alert('creatd!!')
-      onClose()
-    }else{
-      alert
-      alert('Error:' +JSON.stringify(data))
-    }
-  }catch(error){
-    console.error('an error occured while creating user')
+
+},[userInfo])
+
+
+
+
+const handleEdit = async () => {
+  const updatedFields: { [key: string]: any } = {}
+
+  if (firstname !== userInfo.fname) updatedFields.fname = firstname
+  if (lastname !== userInfo.lname) updatedFields.lname = lastname
+  if (email !== userInfo.email) updatedFields.email = email
+  if (jobtitle !== userInfo.job_title) updatedFields.job_title = jobtitle
+  if (group_id !== userInfo.group_id) updatedFields.group_id = Number(group_id)
+  if (role_id !== userInfo.role_id) updatedFields.role_id = Number(role_id)
+
+  // لو ما تغير شيء لا تسوي الطلب
+  if (Object.keys(updatedFields).length === 0) {
+    alert("No changes made.")
+    return
   }
 
+  console.log(updatedFields)
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/users/edit/user/${userID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        
+      },
+      body: JSON.stringify(updatedFields),
+    })
+
+    const data = await response.json()
+
+    if (response.ok) {
+      alert("User updated successfully!")
+      onClose()
+    } else {
+      alert("Error updating user: " + JSON.stringify(data))
+    }
+  } catch (error) {
+    console.error("Error during update:", error)
+    alert("Something went wrong.")
+  }
 }
 
 
@@ -123,7 +167,7 @@ const handleAdd =async ()=>{
       </div>
       <div className='w-1/2  mr-6'>
       <Label htmlFor="Username">Username</Label>
-      <Input className='' type="text" id="Username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+      <Input className='' type="text" id="Username" placeholder="Username" value={username}  readOnly/>
       </div>
   
 
@@ -135,7 +179,7 @@ const handleAdd =async ()=>{
 
       <div  className='w-1/2 ml-6  '>
       <Label htmlFor="Password">Password</Label>
-      <Input className='' type="password" id="Password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+      <Input className='' type="password" id="Password" placeholder="Password" value={12345678}  disabled/>
       </div>
       <div className='w-1/2  mr-6'>
       <Label htmlFor="jobtitle">Job Title</Label>
@@ -156,7 +200,7 @@ const handleAdd =async ()=>{
           <select
             id="Group"
             className="w-full p-2 border rounded"
-            value={group_id} onChange={(e)=>setGroupid(e.target.value)}
+            value={group_id} onChange={(e)=>setGroupid(Number(e.target.value))}
           >
             <option >Select Group</option>
             {groups.map((group)=>(
@@ -176,7 +220,7 @@ const handleAdd =async ()=>{
           <select
             id="Role"
             className="w-full p-2 border rounded"
-            value={role_id} onChange={(e)=>setRoleid(e.target.value)}
+            value={role_id} onChange={(e)=>setRoleid(Number(e.target.value))}
           >
             <option value="">Select Role</option>
             {roles.map((role)=>(
@@ -191,7 +235,7 @@ const handleAdd =async ()=>{
 
    </div>
 
-<div className='flex justify-end  '><Button className='mt-32 mr-6 w-1/3' onClick={handleAdd}>Add</Button> </div>
+<div className='flex justify-end  '><Button className='mt-32 mr-6 w-1/3' onClick={handleEdit}>Save</Button> </div>
 
 
    </div>
@@ -200,4 +244,4 @@ const handleAdd =async ()=>{
   )
 }
 
-export default CreateUser
+export default EditUser

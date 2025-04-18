@@ -13,8 +13,8 @@ function PopUp(  {children,onClose }: PopUpProps) {
   
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-20 flex justify-center py-28">
-      <div className="bg-white w-[43%]  rounded-lg shadow-lg">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center py-36 z-50">
+      <div className="bg-white w-[43%] h-auto rounded-lg shadow-lg">
         
       
         <div className="w-full flex justify-end ">
@@ -25,8 +25,8 @@ function PopUp(  {children,onClose }: PopUpProps) {
         </div>
               
 
-
-        {children} 
+        <div className=" h-auto ">
+        {children} </div>
       </div>
     </div>
   );
