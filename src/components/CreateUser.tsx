@@ -27,6 +27,8 @@ function CreateUser({onClose}:CreateUserProps) {
 
   const [roles,setRoles]=useState<{role_id:number; name:string}[]>([])
   const [groups,setGroups]=useState<{group_id:number; name:string}[]>([])
+  const [errorMessage, setErrorMessage] = useState('');   //write by Fahad
+
 
 
 
@@ -49,42 +51,48 @@ useEffect(() => {
 
 
 
-const handleAdd =async ()=>{
-  const user={
-    username:username,
-    email:email,
-    jobtitle:jobtitle,
-    fname:firstname,
-    lname:lastname,
-    password:password,
-    group_id:Number(group_id),
-    role_id:Number(role_id)
+const handleAdd = async () => {  //غيرت اشياء كثير داخل الفنكشن فهد
+  if (!firstname || !lastname || !email || !username || !password || !group_id || !role_id) {
+    setErrorMessage("Please fill in all the fields");
+    return;
   }
-  
-  try{
-    const response=await fetch("http://127.0.0.1:8000/users/create/user",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
+
+  const user = {
+    username,
+    email,
+    jobtitle,
+    fname: firstname,
+    lname: lastname,
+    password,
+    group_id: Number(group_id),
+    role_id: Number(role_id)
+  }
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/users/create/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify(user),
-
-    
+      body: JSON.stringify(user),
     });
-    const data=await response.json()
 
-    if(response.status===201){
-      alert('creatd!!')
-      onClose()
-    }else{
-      alert
-      alert('Error:' +JSON.stringify(data))
+    const data = await response.json();
+
+    if (response.status === 201) {
+      alert('Created!!');
+      setErrorMessage(""); 
+      onClose();
+    } else {
+      setErrorMessage(data.detail || "Something went wrong.");
     }
-  }catch(error){
-    console.error('an error occured while creating user')
-  }
 
-}
+  } catch (error) {
+    console.error('❌ Real error:', error);
+    setErrorMessage("An error occurred while creating user"); 
+  }
+};
+
 
 
 
@@ -190,8 +198,13 @@ const handleAdd =async ()=>{
 
 
    </div>
+   {/*write by Fahad*/}
+  <div className="w-full h-6 text-red-500 text-center font-semibold "> 
+    {errorMessage}
+  </div>
 
-<div className='flex justify-end  '><Button className='mt-32 mr-6 w-1/3' onClick={handleAdd}>Add</Button> </div>
+
+<div className='flex justify-end  '><Button className='mt-28 mr-6 w-1/3' onClick={handleAdd}>Add</Button> </div>
 
 
    </div>
