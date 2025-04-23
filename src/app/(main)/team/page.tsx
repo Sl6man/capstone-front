@@ -44,13 +44,14 @@ function page() {
   
   },[])
 
-  const handelViewUser=(user_id : number) =>{
-    setUserID(user_id) 
-    console.log(userID)
-    console.log('=-------------=-------------------=---------------')
-    setIsPopupVisibleEditUser(true)
-
-  }
+  const handelViewUser = (user_id: number) => { //write by Fahad
+    setUserID(user_id);
+    setTimeout(() => {
+      setIsPopupVisibleEditUser(true);
+    }, 0);
+  };
+  
+  
 
   const handelDeleteUser=async(user_id : number) =>{
     

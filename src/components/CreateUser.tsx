@@ -84,7 +84,7 @@ const handleAdd = async () => {  //غيرت اشياء كثير داخل الف�
       setErrorMessage(""); 
       onClose();
     } else {
-      setErrorMessage(data.detail || "Something went wrong.");
+      setErrorMessage(data.detail || "Something went wrong");
     }
 
   } catch (error) {
