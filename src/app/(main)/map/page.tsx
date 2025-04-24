@@ -1,15 +1,30 @@
 "use client"
 
 
-import React from 'react'
+import React, { useState } from 'react'
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import Image from 'next/image'
 import ViewAllScraper from '@/components/ViewAllScraper'
+import AddScraper from '@/components/AddScraper'
+import ViewScraper from '@/components/ViewScraper'
+import EditScraper from '@/components/EditScraper'
+
 
 function Page() {
+  const [isOpenNow, setIsOpenNow] = useState<string | null>(null)
+
+
+
+
+  
+
+  
+  const [selectedScraperId, setSelectedScraperId] = useState<number | null>(null);
+  ;
+
   return (
     
-       <div className="w-full h-screen bg-gray-200 overflow-hidden">
+       <div className="w-full h-screen bg-gray-200 overflow-hidden  overflow-x-hidden relative ">
       <TransformWrapper>
         <TransformComponent>
           <Image
@@ -22,7 +37,10 @@ function Page() {
         </TransformComponent>
       </TransformWrapper>
 
-      <ViewAllScraper></ViewAllScraper>
+      <ViewAllScraper  setIsOpenNow={setIsOpenNow}   setSelectedScraperId={setSelectedScraperId} ></ViewAllScraper>
+      {isOpenNow === 'AddScraper' &&  <AddScraper  setIsOpenNow={setIsOpenNow}/>}
+      {isOpenNow === 'ViewScraper' &&  <ViewScraper scraperId={selectedScraperId} setIsOpenNow={setIsOpenNow} />}
+      {isOpenNow === 'EditScraper' &&  <EditScraper scraperId={selectedScraperId} setIsOpenNow={setIsOpenNow} />}
     </div>     
 
 

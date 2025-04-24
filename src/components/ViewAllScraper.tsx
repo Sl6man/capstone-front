@@ -5,14 +5,28 @@ import { HiMapPin } from "react-icons/hi2";
 import ButtonProps from './ButtonProps';
 import { FaPlus } from "react-icons/fa6";
 
-function ViewAllScraper() {
+
+interface ViewAllScraperProps {
+  setIsOpenNow: (value : string | null)=>void;
+  setSelectedScraperId: (value: number) => void;
+}
+
+
+function ViewAllScraper({ setIsOpenNow,setSelectedScraperId }: ViewAllScraperProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const[scrapers,setScrapers]=useState<{scraper_id:number;title:string;status:boolean;created_at:string;ubpated:string}[]>([])
     const [activeScraperId, setActiveScraperId] = useState<number | null>(null);
+    const [OpenViewScraper,setOpenViewScraper]=useState(false)
+
 
     const handleClick = (id: number) => {
-      setActiveScraperId(id); // نخزن الزر النشط فقط
+      setOpenViewScraper(true)
+
+      setActiveScraperId(id); 
+      setSelectedScraperId(id);
+
+      setIsOpenNow(null);
     };
 
     useEffect(() =>{
@@ -22,18 +36,20 @@ function ViewAllScraper() {
        
     },[])
 
-    useEffect(()=>(
-     
-        console.log(scrapers)
+   useEffect(()=>{
     
-    ),[scrapers])
+    if(OpenViewScraper) {
+      setIsOpenNow('ViewScraper');
+    }
+  
+  },[activeScraperId])
 
     
 
 
       
   return (
-    <div className=' absolute h-screen  w-[14.25%] top-0 z-50 py-4 '>
+    <div className=' absolute h-screen  w-[16.25%] top-0 z-50 py-4 '>
         <div className='bg-white w-full h-full rounded-3xl  ml-2  flex flex-col items-center py-8'>
               <p className='font-medium text-3xl mt-2'>Scrapers</p>
 
@@ -60,16 +76,20 @@ function ViewAllScraper() {
               <ButtonProps
               className='bg-yellow-400' 
               text='Create New Scraper'
-              icon={<FaPlus />}
+              icon={<FaPlus className='text-lg ' />}
+              iconBG='py1 ml-2'
+              textStyle='text-white'
+              onClick={() => setIsOpenNow("AddScraper")}
                />
             </div>
 
 
 
-
+  
 
         </div>
         </div>
+      
   )
 }
 
