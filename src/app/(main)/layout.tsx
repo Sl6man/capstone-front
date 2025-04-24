@@ -1,6 +1,4 @@
 import  Menu  from "@/components/Menu";
-import PopUp from "@/components/PopUp";
-import EditUser from "@/components/EditUser";
 import React from "react";
 
 export default function MainLayout({

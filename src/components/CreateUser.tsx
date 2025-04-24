@@ -6,7 +6,7 @@ import PopUp from './PopUp'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { error } from 'console'
+
 
 interface CreateUserProps {
   
@@ -77,11 +77,11 @@ const handleAdd =async ()=>{
       alert('creatd!!')
       onClose()
     }else{
-      alert
+     
       alert('Error:' +JSON.stringify(data))
     }
   }catch(error){
-    console.error('an error occured while creating user')
+    console.error('an error occured while creating user',error)
   }
 
 }

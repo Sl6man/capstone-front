@@ -61,7 +61,7 @@ export const columns=(ViewUser:(user_id:number)=>void,DeleteUser:(user_id:number
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
 
-            <DropdownMenuItem onClick={()=>ViewUser(user.id)}> View customer</DropdownMenuItem>
+            <DropdownMenuItem onClick={()=>ViewUser(user.id)}> View User</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={()=> DeleteUser(user.id)}>Delete User</DropdownMenuItem>
           </DropdownMenuContent>

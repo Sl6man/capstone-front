@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import React, { useEffect } from 'react'
@@ -14,13 +15,13 @@ import CreateUser from '@/components/CreateUser';
 import  Cookies  from 'js-cookie';
 
 import { DataTable } from './data-table';
-import {User,columns} from './columns';
-import { View } from 'lucide-react';
+import {columns} from './columns';
+ 
 
 
 
 
-function page() {
+function Page() {
   const router = useRouter();
   const [isPopupVisibleAddMember, setIsPopupVisibleAddMember] = useState(false);
   const [isPopupVisibleCreateGroup, setIsPopupVisibleCreateGroup] = useState(false);
@@ -46,8 +47,7 @@ function page() {
 
   const handelViewUser=(user_id : number) =>{
     setUserID(user_id) 
-    console.log(userID)
-    console.log('=-------------=-------------------=---------------')
+  
     setIsPopupVisibleEditUser(true)
 
   }
@@ -144,4 +144,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

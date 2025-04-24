@@ -1,15 +1,15 @@
 'use client'
 
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import React from 'react'
 import Image from 'next/image'
-import { FaSquareSnapchat } from "react-icons/fa6";
-import { ok } from 'assert';
+
+
 import  Cookies  from 'js-cookie';
 import { useRouter } from "next/navigation";
 
-function page() {
+function Page() {
  
   const router = useRouter();
   const [username,setUsername]=useState('')
@@ -31,9 +31,9 @@ const handleLogin =async()=>{
     const data= await response.json()
 
     if (response.ok){
-      alert('loggin successful ') // redircet here --
+     // redircet here --
       if (data.access_token) {
-        console.log("Received token:", data.access_token);// احذفها
+        
         Cookies.set("token",data.access_token,{
           expires:30,
           secure: process.env.NODE_ENV==='production',
@@ -50,7 +50,7 @@ const handleLogin =async()=>{
 
 
   }catch(error){
-    alert()
+  console.error(error)
   }
   
 
@@ -129,4 +129,4 @@ const handleLogin =async()=>{
   )
 }
 
-export default page
+export default Page

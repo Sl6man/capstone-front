@@ -1,13 +1,13 @@
 
 
-import React, { useState } from 'react'
+
 
 
 interface ButtonProps{
   text:string;
   onClick?:()=>void;
   icon?: React.ReactNode;
-  variant: 'Primary'|'Danger';
+  variant?: 'Primary'|'Danger';
   iconBG?: string;
   textStyle?: string;
   className?: string;

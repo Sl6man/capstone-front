@@ -15,9 +15,7 @@ function Menu() {
   const [selectedButton, setSelectedButton] = useState<string>("Dashboard")
   const router = useRouter();
 
-const buttonClicked =()=>{
 
-}
 
 
 
