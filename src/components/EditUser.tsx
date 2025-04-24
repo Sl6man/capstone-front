@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 
 
+
+
+
 interface EditUserProps {
   userID:number
   onClose: () => void; // closing popup
@@ -15,6 +18,7 @@ interface EditUserProps {
 }
 function EditUser({onClose,userID}:EditUserProps) {
 
+  const [errorMessage, setErrorMessage] = useState(''); //write by Fahad
     const [userInfo,setUserInfo]=useState({
       
         username: "",
@@ -45,6 +49,8 @@ function EditUser({onClose,userID}:EditUserProps) {
 
 
 useEffect(() => {
+  console.log("User ID is:", userID); // write by Fahad
+  if (!userID) return; //write by Fahad
  
   fetch("http://127.0.0.1:8000/users/role")
   .then((response)=>response.json())
@@ -75,7 +81,7 @@ useEffect(() => {
 
 
 
-},[]);
+}, [userID]); //write by Fahad
 
 useEffect(()=>{
     
@@ -88,7 +94,12 @@ console.log(userInfo)
 
 
 
-const handleEdit = async () => {
+const handleEdit = async () => {  //write by Fahad
+  if (!firstname || !lastname || !email || !group_id || !role_id) {
+    setErrorMessage("Please fill in all the required fields");
+    return;
+  }
+
   const updatedFields: { [key: string]: any } = {}
 
   if (firstname !== userInfo.fname) updatedFields.fname = firstname
@@ -98,11 +109,12 @@ const handleEdit = async () => {
   if (group_id !== userInfo.group_id) updatedFields.group_id = Number(group_id)
   if (role_id !== userInfo.role_id) updatedFields.role_id = Number(role_id)
 
-  // لو ما تغير شيء لا تسوي الطلب
+  // لو ما تغير شيء لا تسوي الطلب ,, تم التغيير من فهد
   if (Object.keys(updatedFields).length === 0) {
-    alert("No changes made.")
-    return
+    setErrorMessage("No changes made");
+    return;
   }
+  
 
   console.log(updatedFields)
 
@@ -118,15 +130,17 @@ const handleEdit = async () => {
 
     const data = await response.json()
 
-    if (response.ok) {
-      alert("User updated successfully!")
-      onClose()
-    } else {
-      alert("Error updating user: " + JSON.stringify(data))
+    if (response.ok) {  //write by Fahad
+      setErrorMessage("");
+      alert("User updated successfully!");
+      onClose();
+    }
+     else {
+      setErrorMessage(data.detail || "Something went wrong");
     }
   } catch (error) {
     console.error("Error during update:", error)
-    alert("Something went wrong.")
+    alert("Something went wrong")
   }
 }
 
@@ -182,9 +196,9 @@ const handleEdit = async () => {
       <Input className='' type="password" id="Password" placeholder="Password" value={12345678}  disabled/>
       </div>
       <div className='w-1/2  mr-6'>
-      <Label htmlFor="jobtitle">Job Title</Label>
-      <Input className='' type="text" id="jobtitle" placeholder="Job Title" value={jobtitle} onChange={(e)=>setJobTitle(e.target.value)}/>
-      </div>
+      <Label htmlFor="jobtitle">Job Title</Label> 
+      <Input className='' type="text" id="jobtitle" placeholder="Job Title" value={jobtitle ?? ""} onChange={(e)=>setJobTitle(e.target.value)}/> 
+      </div>  {/*write By Fahad*/}
 
      
   
@@ -235,11 +249,27 @@ const handleEdit = async () => {
 
    </div>
 
-<div className='flex justify-end  '><Button className='mt-32 mr-6 w-1/3' onClick={handleEdit}>Save</Button> </div>
-
-
-   </div>
+    <div className="w-full h-6 text-red-500 text-center font-semibold mb-6">
+      {errorMessage}
+    </div>
+  
    
+   <div className="mt-28">
+  <div className="flex justify-end">
+    <Button className="mr-6 w-1/3" onClick={handleEdit}>
+      Save
+    </Button>
+  
+</div>
+
+</div>
+
+
+
+
+
+
+</div>
     </PopUp>
   )
 }
