@@ -4,10 +4,10 @@
 import React, { useState } from 'react'
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import Image from 'next/image'
-import ViewAllScraper from '@/components/ViewAllScraper'
-import AddScraper from '@/components/AddScraper'
-import ViewScraper from '@/components/ViewScraper'
-import EditScraper from '@/components/EditScraper'
+import ViewAllScraper from '@/components/map/ViewAllScraper'
+import AddScraper from '@/components/map/AddScraper'
+import ViewScraper from '@/components/map/ViewScraper'
+import EditScraper from '@/components/map/EditScraper'
 
 
 function Page() {

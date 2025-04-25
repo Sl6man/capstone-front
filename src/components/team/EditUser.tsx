@@ -100,7 +100,7 @@ const handleEdit = async () => {  //write by Fahad
     return;
   }
 
-  const updatedFields: { [key: string]: any } = {}
+  const updatedFields: { [key: string]: unknown } = {}
 
   if (firstname !== userInfo.fname) updatedFields.fname = firstname
   if (lastname !== userInfo.lname) updatedFields.lname = lastname

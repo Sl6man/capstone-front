@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import ScraperButton from './ScraperButton';
 import { HiMapPin } from "react-icons/hi2";
-import ButtonProps from './ButtonProps';
+import ButtonProps from '../ButtonProps';
 import { FaPlus } from "react-icons/fa6";
 
 
@@ -33,7 +33,8 @@ function ViewAllScraper({ setIsOpenNow,setSelectedScraperId }: ViewAllScraperPro
         fetch(`${apiUrl}/scraper`)
         .then((response)=>response.json())
         .then((data)=>setScrapers(data))
-       
+        
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
    useEffect(()=>{
@@ -42,6 +43,7 @@ function ViewAllScraper({ setIsOpenNow,setSelectedScraperId }: ViewAllScraperPro
       setIsOpenNow('ViewScraper');
     }
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[activeScraperId])
 
     

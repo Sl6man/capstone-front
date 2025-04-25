@@ -8,9 +8,9 @@ import { useRouter } from 'next/navigation';
 
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdGroups } from "react-icons/md";
-import EditUser from "@/components/EditUser";
-import CreateGroup from '@/components/CreateGroup';
-import CreateUser from '@/components/CreateUser';
+import EditUser from "@/components/team/EditUser";
+import CreateGroup from '@/components/team/CreateGroup';
+import CreateUser from '@/components/team/CreateUser';
 
 import  Cookies  from 'js-cookie';
 
