@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 
 import {
   Card,
@@ -10,27 +9,27 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
 type Props = {
   chartData: {
-    name: string
-    desktop: number
-  }[]
-}
+    name: string;
+    desktop: number;
+  }[];
+};
 
 const chartConfig = {
   desktop: {
     label: "Duplicate Media",
-    color: "#b3b6ba", 
+    color: "#b3b6ba",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export default function MostDuplicateChart({ chartData }: Props) {
   return (
@@ -41,10 +40,7 @@ export default function MostDuplicateChart({ chartData }: Props) {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart
-            data={chartData}
-            margin={{ top: 20 }}
-          >
+          <BarChart data={chartData} margin={{ top: 20 }}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="name"
@@ -60,7 +56,7 @@ export default function MostDuplicateChart({ chartData }: Props) {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="#0017" radius={8}>
+            <Bar dataKey="desktop" fill="#666666" radius={8}>
               <LabelList
                 position="top"
                 offset={12}
@@ -77,5 +73,5 @@ export default function MostDuplicateChart({ chartData }: Props) {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
