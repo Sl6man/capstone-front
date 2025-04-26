@@ -70,3 +70,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+body>div>div.w-\[85\%\].bg-main-background.flex.flex-col.h-screen>div>div.w-full.h-screen.absolute.top-0.left-0>div>div.mapboxgl-control-container>div.mapboxgl-ctrl-top-right{
+  position: absolute;
+  right: 27%;
+  top: 10px;
+  
+}
