@@ -1,0 +1,82 @@
+"use client"
+
+
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+
+type Props = {
+  chartData: {
+    name: string
+    desktop: number
+  }[]
+}
+
+const chartConfig = {
+  desktop: {
+    label: "Total Duration",
+    color: "#b3b6ba",
+  },
+} satisfies ChartConfig
+
+export default function MostDurationChart({ chartData }: Props) {
+  return (
+    <Card className="bg-yellow-300">
+      <CardHeader>
+        <CardTitle>Top Districts by Media Duration</CardTitle>
+        <CardDescription>Based on total media duration</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <BarChart
+            data={chartData}
+            margin={{ top: 20 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="name"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              interval={0}
+              angle={-30}
+              height={85}
+              textAnchor="end"
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar dataKey="desktop" fill="#0017"radius={8}>
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+       
+        <div className="leading-none text-muted-foreground">
+          Showing top districts by duration
+        </div>
+      </CardFooter>
+    </Card>
+  )
+}
