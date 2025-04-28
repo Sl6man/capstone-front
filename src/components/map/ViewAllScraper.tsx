@@ -59,21 +59,22 @@ function ViewAllScraper({
         <p className="font-medium text-3xl mt-2">Scrapers</p>
 
         <div className="mt-12 w-full">
-          {scrapers.map((scraper) => (
-            <React.Fragment key={scraper.scraper_id}>
-              <ScraperButton
-                icon={<HiMapPin />}
-                className={
-                  activeScraperId === scraper.scraper_id ? "bg-gray-50" : ""
-                }
-                text={scraper.title}
-                arrowIcon={<FaArrowRightLong />}
-                onClick={() => handleClick(scraper.scraper_id)}
-              />
+          {scrapers &&
+            scrapers.map((scraper) => (
+              <React.Fragment key={scraper.scraper_id}>
+                <ScraperButton
+                  icon={<HiMapPin />}
+                  className={
+                    activeScraperId === scraper.scraper_id ? "bg-gray-50" : ""
+                  }
+                  text={scraper.title}
+                  arrowIcon={<FaArrowRightLong />}
+                  onClick={() => handleClick(scraper.scraper_id)}
+                />
 
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60" />
-            </React.Fragment>
-          ))}
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60" />
+              </React.Fragment>
+            ))}
         </div>
 
         <div className=" mt-auto w-full px-5">
