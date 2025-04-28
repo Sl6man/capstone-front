@@ -130,6 +130,15 @@ async function Page() {
 
   const wordsData = await res5.json();
 
+  if (
+    !total_snaps &&
+    !top_neighborhood &&
+    !lowest_neighborhood &&
+    !total_photo &&
+    !total_video
+  )
+    return "";
+
   return (
     <div className="flex-col items-center m-6 overflow-auto overflow-x-hidden">
       <div className="flex justify-start gap-10 my-4 mx-10">
