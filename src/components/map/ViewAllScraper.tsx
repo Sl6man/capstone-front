@@ -40,8 +40,8 @@ function ViewAllScraper({
   useEffect(() => {
     fetch(`${apiUrl}/scraper`)
       .then((response) => response.json())
-      .then((data) => setScrapers(data));
-
+      .then((data) => setScrapers(data))
+      .catch((e) => console.log(e));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,7 +58,7 @@ function ViewAllScraper({
       <div className="bg-white w-full h-full rounded-3xl  ml-2  flex flex-col items-center py-8">
         <p className="font-medium text-3xl mt-2">Scrapers</p>
 
-        <div className="mt-12">
+        <div className="mt-12 w-full">
           {scrapers.map((scraper) => (
             <React.Fragment key={scraper.scraper_id}>
               <ScraperButton
