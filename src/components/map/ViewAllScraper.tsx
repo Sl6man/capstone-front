@@ -59,7 +59,7 @@ function ViewAllScraper({
         <p className="font-medium text-3xl mt-2">Scrapers</p>
 
         <div className="mt-12 w-full">
-          {scrapers &&
+          {scrapers.length > 0 &&
             scrapers.map((scraper) => (
               <React.Fragment key={scraper.scraper_id}>
                 <ScraperButton

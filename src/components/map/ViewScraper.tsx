@@ -1,6 +1,5 @@
 import React, { RefObject, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
-import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
 
 interface ViewScraperProps {
@@ -76,7 +75,7 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
         // Optional: fly to the first location
         if (idx === 0) {
           map.fitBounds(turf.bbox(circle), {
-            padding: 50,
+            padding: 10,
           });
         }
       }
@@ -85,10 +84,10 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
 
   return (
     <div
-      className={`absolute top-0 right-1 h-[35%] w-[30%] py-3 mr-7 
-        flex-col items-center
-     transition-transform duration-300 ease-in-out
-    ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
+      className={`absolute top-0 right-1 h-[40%] w-[30%] py-3 mr-7 
+      flex-col items-center
+      transition-transform duration-300 ease-in-out
+      ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
     >
       <div className="w-full h-full bg-white rounded-2xl shadow-lg flex flex-col">
         <div className="flex justify-start w-full mt-4">
@@ -97,37 +96,69 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
           </button>
         </div>
 
-        <div className="flex justify-center items-center">
-          <p className="font-medium text-3xl">{scraper.title}</p>
+        <div className="flex flex-col items-center mt-2">
+          <h1 className="font-medium text-3xl">{scraper.title || "-"}</h1>
         </div>
 
         <div className="px-7">
-          <div className="w-full h-[1px] mt-6 bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-60" />
+          <div className="w-full h-[1px] mt-4 bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-60" />
         </div>
 
-        <div className="flex justify-between mt-5">
-          <div className="ml-10 flex-col items-center">
-            <div className="flex justify-center items-center">
-              <p className="text-lg font-thin">Scraper Status</p>
-            </div>
-            <div className="flex justify-center mt-1">
-              {scraper.status ? (
-                <span className="bg-green-300 text-black px-4 py-1 rounded-full">
-                  Active
-                </span>
-              ) : (
-                <span className="bg-red-400 text-black px-4 py-1 rounded-full">
-                  Disabled
-                </span>
-              )}
-            </div>
+        <div className="flex flex-col gap-4 px-8 mt-6">
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">Status</p>
+            {scraper.status ? (
+              <span className="bg-green-300 text-black px-4 py-1 rounded-full ">
+                Active
+              </span>
+            ) : (
+              <span className="bg-red-400 text-black px-4 py-1 rounded-full">
+                Disabled
+              </span>
+            )}
           </div>
 
-          <div className="mr-12 flex-col items-center">
-            <div className="mt m-1">
-              <p className="text-lg font-thin">Media Collected</p>
-            </div>
-            <div className="flex justify-center">------</div>
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">Start Date</p>
+            <p className="text-lg">
+              {scraper.started_date
+                ? new Date(scraper.started_date).toLocaleString()
+                : "-"}
+            </p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">End Date</p>
+            <p className="text-lg">
+              {scraper.end_date
+                ? new Date(scraper.end_date).toLocaleString()
+                : "-"}
+            </p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">Created At</p>
+            <p className="text-lg">
+              {scraper.created_at
+                ? new Date(scraper.created_at).toLocaleString()
+                : "-"}
+            </p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">Updated At</p>
+            <p className="text-lg">
+              {scraper.updated_at
+                ? new Date(scraper.updated_at).toLocaleString()
+                : "-"}
+            </p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-lg font-semibold">Number of Locations</p>
+            <p className="text-lg">
+              {scraper.locations ? scraper.locations.length : 0}
+            </p>
           </div>
         </div>
 
