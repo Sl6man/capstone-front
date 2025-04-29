@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -46,6 +47,7 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+ 
     setScraper((prev: any) => ({
       ...prev,
       [name]: value,
@@ -96,7 +98,7 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
 
   return (
     <div
-      className={`absolute top-0 right-1 h-screen w-[25%] py-3 mr-7 
+      className={`absolute top-0 right-1 h-screen w-auto py-3 mr-7 
         flex-col items-center
         transition-transform duration-300 ease-in-out
      ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}

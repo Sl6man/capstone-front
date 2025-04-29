@@ -84,7 +84,7 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
 
   return (
     <div
-      className={`absolute top-0 right-1 h-[40%] w-[30%] py-3 mr-7 
+      className={`absolute top-0 right-1 h-auto w-[30%] py-3 mr-7 
       flex-col items-center
       transition-transform duration-300 ease-in-out
       ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
@@ -162,7 +162,7 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
           </div>
         </div>
 
-        <div className="mt-auto flex justify-end">
+        <div className="my-4 flex justify-end">
           <button
             className="bg-yellow-400 w-28 mr-3 mb-3 rounded-3xl "
             onClick={() => setIsOpenNow("EditScraper")}
