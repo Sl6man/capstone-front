@@ -40,7 +40,7 @@ async function Page() {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch media data");
+    // throw new Error("Failed to fetch media data");
   }
 
   const data: { name: string; total_new_media: number }[] = await res.json();
@@ -59,7 +59,7 @@ async function Page() {
   );
 
   if (!res1.ok) {
-    throw new Error("Failed to fetch duration data2");
+    // throw new Error("Failed to fetch duration data2");
   }
 
   const rawData: DurationData[] = await res1.json();
@@ -78,7 +78,7 @@ async function Page() {
   );
 
   if (!res2.ok) {
-    throw new Error("Failed to fetch duplicate data");
+    // throw new Error("Failed to fetch duplicate data");
   }
 
   const rawData2: DuplicateData[] = await res2.json();
@@ -94,7 +94,7 @@ async function Page() {
     cache: "no-store",
   });
   if (!res3.ok) {
-    throw new Error("Failed to fetch KPIs");
+    // throw new Error("Failed to fetch KPIs");
   }
 
   const kpiData: Kpis = await res3.json();
@@ -114,7 +114,7 @@ async function Page() {
     }
   );
   if (!res4.ok) {
-    throw new Error("Failed to fetch weekday snaps");
+    // throw new Error("Failed to fetch weekday snaps");
   }
 
   const weekDaysData: WeekdaySnap[] = await res4.json();
@@ -125,10 +125,19 @@ async function Page() {
   });
 
   if (!res5.ok) {
-    throw new Error("Failed to fetch words");
+    // throw new Error("Failed to fetch words");
   }
 
   const wordsData = await res5.json();
+
+  if (
+    !total_snaps &&
+    !top_neighborhood &&
+    !lowest_neighborhood &&
+    !total_photo &&
+    !total_video
+  )
+    return "";
 
   return (
     <div className="flex-col items-center m-6 overflow-auto overflow-x-hidden">

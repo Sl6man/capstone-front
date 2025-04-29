@@ -35,6 +35,7 @@ function Page() {
         <ViewScraper
           scraperId={selectedScraperId}
           setIsOpenNow={setIsOpenNow}
+          mapRef={mapRef}
         />
       )}
       {isOpenNow === "EditScraper" && (

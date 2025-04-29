@@ -40,8 +40,8 @@ function ViewAllScraper({
   useEffect(() => {
     fetch(`${apiUrl}/scraper`)
       .then((response) => response.json())
-      .then((data) => setScrapers(data));
-
+      .then((data) => setScrapers(data))
+      .catch((e) => console.log(e));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,22 +58,23 @@ function ViewAllScraper({
       <div className="bg-white w-full h-full rounded-3xl  ml-2  flex flex-col items-center py-8">
         <p className="font-medium text-3xl mt-2">Scrapers</p>
 
-        <div className="mt-12">
-          {scrapers.map((scraper) => (
-            <React.Fragment key={scraper.scraper_id}>
-              <ScraperButton
-                icon={<HiMapPin />}
-                className={
-                  activeScraperId === scraper.scraper_id ? "bg-gray-50" : ""
-                }
-                text={scraper.title}
-                arrowIcon={<FaArrowRightLong />}
-                onClick={() => handleClick(scraper.scraper_id)}
-              />
+        <div className="mt-12 w-full">
+          {scrapers.length > 0 &&
+            scrapers.map((scraper) => (
+              <React.Fragment key={scraper.scraper_id}>
+                <ScraperButton
+                  icon={<HiMapPin />}
+                  className={
+                    activeScraperId === scraper.scraper_id ? "bg-gray-50" : ""
+                  }
+                  text={scraper.title}
+                  arrowIcon={<FaArrowRightLong />}
+                  onClick={() => handleClick(scraper.scraper_id)}
+                />
 
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60" />
-            </React.Fragment>
-          ))}
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60" />
+              </React.Fragment>
+            ))}
         </div>
 
         <div className=" mt-auto w-full px-5">
