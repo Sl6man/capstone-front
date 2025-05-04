@@ -155,6 +155,13 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
           </div>
 
           <div className="flex justify-between">
+            <p className="text-lg font-semibold">Number of media collected</p>
+            <p className="text-lg">
+              {scraper.locations ? scraper.media_count : 0}
+            </p>
+          </div>
+
+          <div className="flex justify-between">
             <p className="text-lg font-semibold">Number of Locations</p>
             <p className="text-lg">
               {scraper.locations ? scraper.locations.length : 0}
