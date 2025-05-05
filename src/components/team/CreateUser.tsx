@@ -58,6 +58,12 @@ const handleAdd = async () => {  //غيرت اشياء كثير داخل الف�
     return;
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setErrorMessage("Please enter a valid email address");
+    return;
+  }
+
   const user = {
     username,
     email,
