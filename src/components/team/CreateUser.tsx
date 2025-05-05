@@ -6,6 +6,7 @@ import PopUp from './PopUp'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { IoMdCloseCircleOutline } from 'react-icons/io'
 
 
 interface CreateUserProps {
@@ -80,15 +81,16 @@ const handleAdd = async () => {  //غيرت اشياء كثير داخل الف�
     const data = await response.json();
 
     if (response.status === 201) {
-      alert('Created!!');
+      
       setErrorMessage(""); 
       onClose();
+      window.location.reload();
     } else {
       setErrorMessage(data.detail || "Something went wrong");
     }
 
   } catch (error) {
-    console.error('❌ Real error:', error);
+    console.error(' Real error:', error);
     setErrorMessage("An error occurred while creating user"); 
   }
 };
@@ -98,9 +100,16 @@ const handleAdd = async () => {  //غيرت اشياء كثير داخل الف�
 
 
   return (
-    <PopUp  onClose={onClose}>
-   <div className='h-full'>
-   <div className='flex-col items-center my-6'>
+    <PopUp  >
+   <div className='bg-white p-3 rounded-xl shadow-md'>
+   <div className='flex-col items-center my-3'>
+
+
+      <div className="w-full flex justify-end ">
+        <button onClick={onClose}>
+          <IoMdCloseCircleOutline className="text-black text-lg" />
+         </button>
+      </div>
    
   {/* line 1 */}
     <div className='flex ml-6 '><h2><span className='text-xl font-semibold align-text-top'>Create User</span></h2></div>

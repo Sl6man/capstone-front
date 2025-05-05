@@ -74,6 +74,7 @@ export default function AddLocations({
 
     if (!features.length) return;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newLocations: Location[] = features.map((feature: any) => {
       const coordinates = feature.geometry.coordinates[0];
       const center = calculatePolygonCenter(coordinates);

@@ -24,12 +24,12 @@ function Menu() {
   };
 
   return (
-    <div className="flex flex-col items-start p-5 mt-3 ml-3 h-screen ">
+    <div className="flex flex-col items-start p-5 mt-3 ml-3 h-screen   ">
       {/* logo */}
-      <div className="flex justify-center gap-3 ml-12">
-        <div className="">
+      <div className="flex items-center gap-3 ml-16 md:ml-6 justify-center md:justify-start ">
+       
           <Image src="/Group.png" alt="" width={40} height={0} />
-        </div>
+        
 
         <div className="mt-4 pt-1 ">
           <h2 className="">
@@ -42,8 +42,10 @@ function Menu() {
       {/*---------- */}
 
       <div className="flex flex-col items-center w-full mt-5">
-        <div className="w-full h-[1px] border-t border-t-gray-400 shadow-2xl"></div>
+        <div className="w-full h-[1px] border-t border-t-gray-00 shadow-2xl"></div>
       </div>
+
+    
       {/*end logo */}
 
       {/* HOME */}

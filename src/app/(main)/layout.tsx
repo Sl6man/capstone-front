@@ -10,7 +10,7 @@ export default function MainLayout({
     //<PopUp></PopUp> <EditUser></EditUser>
     <div className="h-screen flex overflow-hidden">
       {/* left */}
-      <div className="w-[15%] bg-main-background border-r-2 borfer-gray-50">
+      <div className="w-[15%]  bg-main-background border-r-2 border-gray-50">
         <Menu></Menu>
       </div>
 

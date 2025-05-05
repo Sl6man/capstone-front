@@ -29,6 +29,7 @@ function Page() {
 
 
   const  [userID,setUserID]=useState(0)
+ 
 
   const [userInfoTable ,setUserInfoTable]=useState<{id:number ;name:string; email:string; group:string; role:string}[]>([])
 
@@ -44,6 +45,22 @@ function Page() {
 
   
   },[])
+
+/** 
+  useEffect(()=>{
+    fetch("http://localhost:8000/users/test", {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + Cookies.get('token'),
+        "Accept": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => setUserID1(data))
+    .catch(err => console.error(err));
+    
+  },[])
+*/
 
   const handelViewUser = (user_id: number) => { //write by Fahad
     setUserID(user_id);

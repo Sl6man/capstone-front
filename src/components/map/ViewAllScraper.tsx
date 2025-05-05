@@ -37,12 +37,22 @@ function ViewAllScraper({
     setIsOpenNow(null);
   };
 
-  useEffect(() => {
+  const fetchScrapers = () => {
     fetch(`${apiUrl}/scraper`)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => setScrapers(data))
-      .catch((e) => console.log(e));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      .catch(console.log);
+  };
+
+  useEffect(() => {
+    fetchScrapers();
+  }, []);
+
+  useEffect(() => {
+    const handleRefresh = () => fetchScrapers();
+    window.addEventListener("scraper-added", handleRefresh);
+
+    return () => window.removeEventListener("scraper-added", handleRefresh);
   }, []);
 
   useEffect(() => {
@@ -59,7 +69,7 @@ function ViewAllScraper({
         <p className="font-medium text-3xl mt-2">Scrapers</p>
 
         <div className="mt-12 w-full">
-          {scrapers.length>0 &&
+          {scrapers.length > 0 &&
             scrapers.map((scraper) => (
               <React.Fragment key={scraper.scraper_id}>
                 <ScraperButton
