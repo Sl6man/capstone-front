@@ -14,7 +14,7 @@ function AddScraper({ setIsOpenNow, mapRef }: AddScraperProps) {
 
   return (
     <div
-      className={`absolute  top-0 right-1 h-screen w-[25%] py-3 mr-7 
+      className={`absolute  top-0 right-1 h-screen w-auto py-3 mr-7 
         flex-col items-center
     transition-transform duration-300 ease-in-out
  ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}

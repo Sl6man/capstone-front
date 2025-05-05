@@ -73,7 +73,7 @@ function Page() {
 
   const handelDeleteUser=async(user_id : number) =>{
     
-    console.log(user_id)
+    
     const confirmed = window.confirm("Are you sure you want to delete this user?");
   if (!confirmed) return;
 
@@ -87,7 +87,7 @@ function Page() {
     });
 
     if (response.ok) {
-      alert("User deleted successfully.");
+      window.location.reload();
       
      
     } else {
