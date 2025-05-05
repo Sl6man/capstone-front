@@ -24,7 +24,7 @@ function Menu() {
   };
 
   return (
-    <div className="flex flex-col items-start p-5 mt-3 ml-3 h-screen   ">
+    <div className="flex flex-col items-start p-5 mt-3 ml-3 h-screen border-r-2  ">
       {/* logo */}
       <div className="flex items-center gap-3 ml-16 md:ml-6 justify-center md:justify-start ">
        
@@ -49,7 +49,7 @@ function Menu() {
       {/*end logo */}
 
       {/* HOME */}
-      <div className="flex flex-col items-start w-full  ">
+      <div className="flex flex-col items-start w-full   ">
         <Link href="/dashboard" className="w-full">
           <ButtonProps
             text="Dashboard"
