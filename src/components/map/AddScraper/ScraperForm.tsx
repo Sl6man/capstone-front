@@ -92,6 +92,7 @@ export default function ScraperForm({
 
         const locationData = await locationResponse.json();
         console.log("Created location:", locationData);
+        window.dispatchEvent(new Event("scraper-added"));
       }
 
       // 3️⃣ Success

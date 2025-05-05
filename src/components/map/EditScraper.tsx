@@ -47,7 +47,7 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
- 
+
     setScraper((prev: any) => ({
       ...prev,
       [name]: value,
@@ -77,6 +77,7 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
       }
 
       console.log("Scraper updated!");
+      window.dispatchEvent(new Event("scraper-added"));
       setIsOpenNow(null);
     } catch (error) {
       console.error("Update error:", error);
