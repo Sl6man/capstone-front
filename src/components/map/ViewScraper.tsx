@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { RefObject, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import * as turf from "@turf/turf";

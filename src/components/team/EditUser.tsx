@@ -95,7 +95,7 @@ function EditUser({ onClose, userID }: EditUserProps) {
 
       if (response.ok) {
         setErrorMessage("");
-        alert("User updated successfully!");
+       
         onClose();
         window.location.reload();
       } else {

@@ -105,7 +105,7 @@ export default function ScraperForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6 mt-4 px-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6 mt-4 px-4 ">
       <div className="flex flex-col gap-2">
         <Label htmlFor="title">Title</Label>
         <Input

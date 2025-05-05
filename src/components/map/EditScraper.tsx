@@ -97,6 +97,35 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
     );
   };
 
+  const handelDeleteScraper=async(scraper_id : number) =>{
+    
+
+  try {
+    setIsOpen(null)
+    const response = await fetch(`http://127.0.0.1:8000/scraper/delete/${scraper_id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+     
+      },
+    });
+
+    if (response.ok) {
+      window.location.reload();
+      
+     
+    } else {
+      const errorData = await response.json();
+      alert("Error: " + JSON.stringify(errorData));
+    }
+  } catch (error) {
+    console.error("Delete error:", error);
+    alert("An unexpected error occurred.");
+  }
+
+  }
+
+
   return (
     <div
       className={`absolute top-0 right-1 h-screen w-auto py-3 mr-7 
@@ -172,7 +201,17 @@ function EditScraper({ scraperId, setIsOpenNow }: EditScraperProps) {
           >
             {loading ? "Saving..." : "Save Changes"}
           </Button>
+
+          
         </form>
+        <div className="w-full px-6 mt-auto mb-6">
+        <Button 
+        className="w-full bg-red-600  "
+        onClick={()=>handelDeleteScraper(scraperId)}
+        >
+          <p className=" text-lg text-white"> Delete</p>
+        </Button>
+        </div>
       </div>
     </div>
   );
