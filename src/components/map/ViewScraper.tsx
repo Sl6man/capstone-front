@@ -38,11 +38,18 @@ function ViewScraper({ scraperId, setIsOpenNow, mapRef }: ViewScraperProps) {
     }
 
     return () => {
+      const map = mapRef.current;
+      if (!map) return;
       // Clean up when component unmounts
       scraper.locations.forEach((_: any, idx: number) => {
         const id = `scraper-circle-${scraper.scraper_id}-${idx}`;
-        if (map.getLayer(id)) map.removeLayer(id);
-        if (map.getSource(id)) map.removeSource(id);
+
+        try {
+          if (map.getLayer(id)) map.removeLayer(id);
+          if (map.getSource(id)) map.removeSource(id);
+        } catch (err) {
+          console.warn(`Error removing layer or source for ${id}:`, err);
+        }
       });
     };
   }, [scraper, mapRef]);
